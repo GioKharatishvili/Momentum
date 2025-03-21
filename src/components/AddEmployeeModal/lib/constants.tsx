@@ -1,0 +1,1 @@
+export const MAX_IMG_UPLOAD_SIZE = 600 * 1024;
