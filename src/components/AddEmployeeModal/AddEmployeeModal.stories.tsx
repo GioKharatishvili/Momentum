@@ -18,7 +18,7 @@ export const WithState = () => {
 
   return (
     <AddEmployeeModal
-      options={["HR", "IT", "Marketing"]}
+      // options={["HR", "IT", "Marketing"]}
       onClose={() => setIsOpen(false)}
       {...{ isOpen }}
     />

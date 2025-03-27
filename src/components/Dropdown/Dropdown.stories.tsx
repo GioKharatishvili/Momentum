@@ -8,9 +8,16 @@ const meta: Meta<typeof Dropdown> = {
 
 export default meta;
 
-export const Default = () => <Dropdown label="დეპარტამენტი" />;
+export const Default = () => <Dropdown label="დეპარტამენტი" onSelect={() => {}} />;
 
 export const WithOptions = () => (
-  <Dropdown label="დეპარტამენტი" options={["HR", "IT", "Marketing"]} />
+  <Dropdown
+    label="დეპარტამენტი"
+    options={[
+      { id: 1, name: "HR" },
+      { id: 2, name: "IT" },
+      { id: 3, name: "Marketing" },
+    ]}
+    onSelect={() => {}}
+  />
 );
-

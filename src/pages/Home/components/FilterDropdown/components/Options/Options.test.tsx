@@ -5,18 +5,13 @@ import { Priority } from "@/types/front-types";
 const mockToggleOption = jest.fn();
 
 const OPTIONS = [
-  { label: Priority.High, value: "high" },
-  { label: Priority.Medium, value: "medium" },
-  { label: Priority.Low, value: "low" },
+  { id: 1, label: Priority.High },
+  { id: 2, label: Priority.Medium },
+  { id: 3, label: Priority.Low },
 ];
 
-const renderComponent = (selectedOptions: string[] = [], options = OPTIONS) =>
-  render(
-    <Options
-      toggleOption={mockToggleOption}
-      {...{ options, selectedOptions }}
-    />
-  );
+const renderComponent = (selectedOptions: number[] = [], options = OPTIONS) =>
+  render(<Options toggleOption={mockToggleOption} {...{ options, selectedOptions }} />);
 
 describe("Options", () => {
   beforeEach(() => {
@@ -26,13 +21,11 @@ describe("Options", () => {
   it("renders correctly", () => {
     const { getByLabelText } = renderComponent();
 
-    OPTIONS.forEach(({ label }) =>
-      expect(getByLabelText(label)).toBeInTheDocument()
-    );
+    OPTIONS.forEach(({ label }) => expect(getByLabelText(label)).toBeInTheDocument());
   });
 
-  it("checkboxes are checked when selectedOptions contains their value", () => {
-    const { getByLabelText } = renderComponent(["high", "medium"]);
+  it("checkboxes are checked when selectedOptions contains their id", () => {
+    const { getByLabelText } = renderComponent([1, 2]);
 
     expect(getByLabelText(Priority.High)).toBeChecked();
     expect(getByLabelText(Priority.Medium)).toBeChecked();
@@ -44,7 +37,7 @@ describe("Options", () => {
 
     fireEvent.click(getByLabelText(Priority.High));
 
-    expect(mockToggleOption).toHaveBeenCalledWith("high");
+    expect(mockToggleOption).toHaveBeenCalledWith(1);
   });
 
   it("handles empty options gracefully", () => {
